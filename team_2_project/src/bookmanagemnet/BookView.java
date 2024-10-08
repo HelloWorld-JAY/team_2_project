@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
@@ -27,18 +28,25 @@ public class BookView extends JPanel{
 
 	JTable table;																	// J테이블 선언
 
+	// 모델단 선언
+	BookDao dao;
+	
 	public BookView(){
-
-		connetDB();		// 디비 연결
+		
 		addLayout();	// 화면출력 메서드
 		eventProc();	// 이벤트 메서드
-
+		connetDB();		// 디비 연결
+		showAllItem();
 
 
 	}
 
 	void connetDB() {
-
+		try {
+			dao = new BookDaoImpl();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	void addLayout() {
@@ -142,6 +150,21 @@ public class BookView extends JPanel{
 
 		}
 
+	}
+	
+	void showAllItem() {
+		
+		try {
+			ArrayList<BookVO> list = dao.bookSelectAll(); 
+			for(BookVO vo : list) {
+				model.addRow(vo.toStringList());
+			}
+			model.fireTableDataChanged();
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
 	}
 
 
