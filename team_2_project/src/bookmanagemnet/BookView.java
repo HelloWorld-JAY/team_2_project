@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -18,9 +21,9 @@ public class BookView extends JPanel{
 
 	JComboBox<String>	largeCate,smallCate,searchCate;	// 대분류, 소분류, 검색분류
 
-	JTextField	jtfSearch;						// 검색 텍스트필드
+	JTextField	jtfSearch;								// 검색 텍스트필드
 
-	JButton		bBorrow,breturn;				// 대여, 반납 버튼
+	JButton		bBorrow,breturn;						// 대여, 반납 버튼
 
 	String [] header = {"대분류","소분류","도서명","저자","츌판사","총수량","잔여수량","도서위치"};	// 테이블 헤더 셋팅
 
@@ -36,11 +39,11 @@ public class BookView extends JPanel{
 		addLayout();	// 화면출력 메서드
 		eventProc();	// 이벤트 메서드
 		connetDB();		// 디비 연결
-		showAllItem();
+		showAllItem();	// 모든 책정보 불러서 테이블에 출력하는 메서드
 
 
 	}
-
+	// 디비 연결
 	void connetDB() {
 		try {
 			dao = new BookDaoImpl();
@@ -48,7 +51,7 @@ public class BookView extends JPanel{
 			e.printStackTrace();
 		}
 	}
-
+	// 화면출력 메서드
 	void addLayout() {
 		//--------------------------------------------------------------------------화면 출력 변수 초기화
 		String[] largeCateStr 		= {"대분류","언어","역사","예술"};
@@ -99,8 +102,9 @@ public class BookView extends JPanel{
 		add(new JScrollPane(table),BorderLayout.CENTER);	// 중앙에 테이블 배치
 		add(south_panel,BorderLayout.SOUTH);				// 남쪽에 판넬 배치
 	}
-
+	// 이벤트 메서드
 	void eventProc() {
+		// 카테고리 이벤트
 		largeCate.addActionListener(new ActionListener() {
 
 			@Override
@@ -111,20 +115,41 @@ public class BookView extends JPanel{
 
 
 
-
+		// 대여버튼 이벤트
 		bBorrow.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				String borrowBookID = enterBookUnique();
+				
+				if(borrowBookID.equals(null)) {}				
+				else {
+					// 해당북아이디로 책정보 불러오는 메서드
+					
+					// 창 띄우고 책정보 입력 및 대여 학번 받아서 통계 관련 정보 저장.
+					
+					// 책대여기간 알려주는 창 띄우고 마무리.
+				}
+				
 			}
 		});
-
+		// 반납버튼 이벤트
 		breturn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				
+				String returnBookID = enterBookUnique();
+				
+				if(returnBookID.equals(null)) {}				
+				else {
+					// 해당북아이디로 책정보 및 대여정보 불러오는 메서드
+					
+					// 해당 책정보 및 대여정보,반납여부 묻는 창 띄우기.
+					
+					// 반납이 완료되었습니다 창띄우기.(연체료 계산까지)
+				}
 			}
 		});
 
@@ -151,7 +176,7 @@ public class BookView extends JPanel{
 		}
 
 	}
-	
+	// 모든 책정보 불러서 테이블에 출력하는 메서드
 	void showAllItem() {
 		
 		try {
@@ -165,6 +190,38 @@ public class BookView extends JPanel{
 			e.printStackTrace();
 		}
 		
+	}
+	
+	// 책고유번호 입력하는 창 띄우고 고유번호 리턴하는 메서드
+	String enterBookUnique() {
+		
+		JPanel panel = new JPanel(); 
+		panel.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.insets = new Insets(10, 10, 10, 10);
+		
+		JLabel jl = new JLabel("책고유번호를 입력해주세요.");
+		jl.setHorizontalAlignment(SwingConstants.CENTER);
+		JTextField jtf = new JTextField(20);
+		jtf.setHorizontalAlignment(JTextField.CENTER);
+		
+		gbc.gridx = 0; gbc.gridy = 0;
+		panel.add(jl,gbc);
+		gbc.gridy = 1;
+		panel.add(jtf,gbc);
+		
+		int result = JOptionPane.showOptionDialog(null, panel, "고유번호 입력",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+                new Object[]{"확인","취소"}, null);
+		
+		if(result == JOptionPane.OK_OPTION) {
+			return jtf.getText();
+		}else {
+			return null;
+		}
+		
+		
+				
 	}
 
 
