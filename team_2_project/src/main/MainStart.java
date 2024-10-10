@@ -48,7 +48,7 @@ public class MainStart extends JFrame{
 		jTabPane.remove(login);
 
 		jTabPane.addTab("도서 대여&반납", book);  // 도서 대여/반납 탭 추가
-
+		
 	}
 
 	public static void main(String[] args) {

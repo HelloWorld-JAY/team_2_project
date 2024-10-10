@@ -9,7 +9,8 @@ public class BookVO {
 	private String author;
 	private String publisher;
 	private String location;
-	
+	private int	   count;
+	private int	   totalrenting;
 	
 	
 	public int getBookID() {
@@ -55,10 +56,23 @@ public class BookVO {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+		public int getTotalrenting() {
+		return totalrenting;
+	}
+	public void setTotalrenting(int totalrenting) {
+		this.totalrenting = totalrenting;
+	}
 	
-
+	
+	
 	public String[] toStringList() {
-		 String[] list = {largeCategory,smallCategory,bookName,author,publisher,location};
+		 String[] list = {bookID+"",largeCategory,smallCategory,bookName,author,publisher,count+"",totalrenting+"",location};
 		 return list;
 	}
 	

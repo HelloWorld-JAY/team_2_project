@@ -80,8 +80,8 @@ public class Login extends JPanel {
 
 	void addLayout() {
 
-		jtfID		= new JTextField(14);
-		jpfPassword	= new JPasswordField(14);
+		jtfID		= new JTextField(16);
+		jpfPassword	= new JPasswordField(16);
 
 		jbAdmin		= new JButton("관리자 로그인");
 		jbUser	= new JButton("일반사용자 로그인");
@@ -94,40 +94,41 @@ public class Login extends JPanel {
 
 		center_panel.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();				// 그리드백 세부설정 메서드
-		gbc.insets = new Insets(25, 10, 25, 10);						// 여백설정
+		gbc.insets = new Insets(35, 15, 35, 15);						// 여백설정
 		gbc.anchor = GridBagConstraints.CENTER;
 
 		gbc.gridwidth = 2 ;
 		gbc.gridx = 0 ; gbc.gridy = 0 ;
 		center_panel.add(jlMain,gbc);
-		jlMain.setFont(new Font("돋음",Font.BOLD,30));
+		jlMain.setFont(new Font("돋음",Font.BOLD,40));
 
 		gbc.gridwidth = 1 ;
 		gbc.gridx = 0 ; gbc.gridy = 1 ;
 		center_panel.add(jlID,gbc);
-		jlID.setFont(new Font("돋음",Font.BOLD,15));
+		jlID.setFont(new Font("돋음",Font.BOLD,20));
 
 		gbc.gridx = 1 ; gbc.gridy = 1 ;
 		center_panel.add(jtfID,gbc);
-
+		jtfID.setFont(new Font("돋음",Font.BOLD,15));
+		
 		gbc.gridx = 0 ; gbc.gridy = 2 ;
 		center_panel.add(jlPassword,gbc);
-		jlPassword.setFont(new Font("돋음",Font.BOLD,15));
+		jlPassword.setFont(new Font("돋음",Font.BOLD,20));
 
 
 		gbc.gridx = 1 ; gbc.gridy = 2 ;
 		center_panel.add(jpfPassword,gbc);
-
+		jpfPassword.setFont(new Font("돋음",Font.BOLD,15));
 
 		gbc.gridx = 0 ; gbc.gridy = 3 ;
 		center_panel.add(jbAdmin,gbc);
-		jbAdmin.setPreferredSize(new Dimension(180,30));
-		jbAdmin.setFont(new Font("돋음",Font.BOLD,15));
+		jbAdmin.setPreferredSize(new Dimension(210,40));
+		jbAdmin.setFont(new Font("돋음",Font.BOLD,18));
 
 		gbc.gridx = 1 ; gbc.gridy = 3 ;
 		center_panel.add(jbUser,gbc);
-		jbUser.setPreferredSize(new Dimension(180,30));
-		jbUser.setFont(new Font("돋음",Font.BOLD,15));
+		jbUser.setPreferredSize(new Dimension(210,40));
+		jbUser.setFont(new Font("돋음",Font.BOLD,18));
 
 		setLayout(new BorderLayout());
 		add(center_panel,BorderLayout.CENTER);
