@@ -1,7 +1,8 @@
-package bookmanagemnet;
+package bookmanagement;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -26,6 +27,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 public class BookAdminView extends JPanel{
 
@@ -62,7 +65,7 @@ public class BookAdminView extends JPanel{
 		eventProc();	// 이벤트 메서드
 		connetDB();		// 디비 연결
 		showAllItem();	// 모든 책정보 불러서 테이블에 출력하는 메서드
-
+		resizeColumnWidth(table); // 테이블 컬럼 리사이즈
 
 	}
 	// 디비 연결
@@ -127,7 +130,7 @@ public class BookAdminView extends JPanel{
 		bDel.setFont(new Font("돋음",Font.BOLD,20));;
 
 		// 테이블 UI셋팅
-		table.getColumn("도서명").setPreferredWidth(250);
+		
 
 		//화면배치
 		setLayout(new BorderLayout());						// 메인 레이아웃은 보더레이아웃
@@ -286,35 +289,7 @@ public class BookAdminView extends JPanel{
 
 	}
 
-	// 책고유번호 입력하는 창 띄우고 고유번호 리턴하는 메서드
-	String enterBookUnique() {
-
-		JPanel panel = new JPanel(); 
-		panel.setLayout(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.insets = new Insets(10, 10, 10, 10);
-
-		JLabel jl = new JLabel("책고유번호를 입력해주세요.");
-		jl.setHorizontalAlignment(SwingConstants.CENTER);
-		JTextField jtf = new JTextField(20);
-		jtf.setHorizontalAlignment(JTextField.CENTER);
-
-		gbc.gridx = 0; gbc.gridy = 0;
-		panel.add(jl,gbc);
-		gbc.gridy = 1;
-		panel.add(jtf,gbc);
-
-		int result = JOptionPane.showOptionDialog(null, panel, "고유번호 입력",
-				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null,
-				new Object[]{"확인","취소"}, null);
-
-		if(result == JOptionPane.OK_OPTION) {
-			return jtf.getText();
-		}else {
-			return null;
-		}
-
-	}
+	
 	// 소분류 선택시 검색기능
 	void smallCategorySelect(String category) {
 
@@ -732,4 +707,17 @@ public class BookAdminView extends JPanel{
 			e.printStackTrace();
 		}
 	}
+	// 테이블 사이즈 자동 조정 메서드
+		public void resizeColumnWidth(JTable table) {
+		    final TableColumnModel columnModel = table.getColumnModel();
+		    for (int column = 0; column < table.getColumnCount(); column++) {
+		        int width = 50; // Min width
+		        for (int row = 0; row < table.getRowCount(); row++) {
+		            TableCellRenderer renderer = table.getCellRenderer(row, column);
+		            Component comp = table.prepareRenderer(renderer, row, column);
+		            width = Math.max(comp.getPreferredSize().width +1 , width);
+		        }
+		        columnModel.getColumn(column).setPreferredWidth(width);
+		    }
+		}
 }

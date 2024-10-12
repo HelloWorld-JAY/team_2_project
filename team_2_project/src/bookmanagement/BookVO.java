@@ -1,4 +1,4 @@
-package bookmanagemnet;
+package bookmanagement;
 
 public class BookVO {
 

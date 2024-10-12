@@ -7,5 +7,8 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="D:/DB드라이버/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ict-07/git/team_2_project/team_2_project/src/chart/libs/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ict-07/git/team_2_project/team_2_project/src/chart/libs/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ict-07/git/team_2_project/team_2_project/src/driver/mysql-connector-j-8.0.33.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

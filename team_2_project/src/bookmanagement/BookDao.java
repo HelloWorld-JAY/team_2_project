@@ -1,4 +1,4 @@
-package bookmanagemnet;
+package bookmanagement;
 
 import java.util.ArrayList;
 
@@ -24,8 +24,18 @@ public interface BookDao {
 	public String bookImageSelect(int bookID)throws Exception;
 	
 	// 대여 메서드
-	public void borrowDateInsert(String studentID,String borrowBookID)throws Exception;
+	public ArrayList borrowDateInsert(int studentID,int borrowBookID)throws Exception;
 	// 학생 관리 연동
-	public ArrayList studentIDSelect(int studentID,String borrowID)throws Exception;
+	public ArrayList studentIDSelect(int studentID,String countID)throws Exception;
+	// 한가지 책정보 가져오기
+	public BookVO bookSelectOne(int Bookid)throws Exception;
+	// 반납에서 책정보 가져오기
+	public BookVO returnSelectOne(int countid) throws Exception;
+	
+	// 대여 정보 가져오는 메서드
+	public ArrayList<ArrayList> rentSelectAll(int studentID)throws Exception;
+	
+	// 반납 날짜 + 미납기간 + 책 대여가능 수정 메서드
+	public String returnRentUpIn(int countID,int rentid)throws Exception;
 	
 }
