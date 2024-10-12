@@ -70,7 +70,7 @@ public class Database {
 					+ "        WHEN ks.age BETWEEN 30 AND 39 THEN '30대'"
 					+ "        WHEN ks.age BETWEEN 40 AND 49 THEN '40대'"
 					+ "        ELSE '기타'"
-					+ "    END";
+					+ "    END ORDER BY age_group desc";
 			
 			
 			//***************************************************************
@@ -102,10 +102,10 @@ public class Database {
 			Connection con = DriverManager.getConnection(URL, USER , PASS);	
 			
 			//***************************************************************
-			String sql = " SELECT ks.CLASSNAME classname ,  COUNT(kb.RENTID) rentcountn"
+			String sql = " SELECT ks.CLASSNAME classname ,  COUNT(kb.RENTID) rentcount"
 					+ " FROM K_BOOKMANAGEMENT kb"
 					+ " INNER JOIN K_STUDENT ks ON kb.STUDENTID = ks.STUDENTID"
-					+ " GROUP BY ks.CLASSNAME ";
+					+ " GROUP BY ks.CLASSNAME ORDER BY ks.CLASSNAME desc";
 			
 			
 			//***************************************************************

@@ -26,8 +26,8 @@ public class ChartView extends JPanel{
 		chartPanelAge=new ChartPanel(chartAge);
 		
 		cclass = new ChartClass();
-		chartCclass = age.getChart(); 
-		chartPanelCclass=new ChartPanel(chartAge);
+		chartCclass = cclass.getChart(); 
+		chartPanelCclass=new ChartPanel(chartCclass);
 		
 		setLayout(new GridLayout(2,2));
 		add(chartPanelGender);
